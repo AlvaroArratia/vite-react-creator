@@ -2,10 +2,10 @@
   "name": "react-template",
   "version": "0.1.0",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "license": "MIT",
   "bin": {
-    "create-react-template": "./src/index.js"
+    "create-react-template": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsc -w",

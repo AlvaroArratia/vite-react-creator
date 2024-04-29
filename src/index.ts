@@ -1,10 +1,14 @@
 #! /usr/bin/env node
-
 import { Command } from "commander";
 import logger from "./utils/logger.js";
 import readline from "node:readline";
 import exec from "node:child_process";
 import fs from "node:fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const program = new Command();
 
@@ -26,7 +30,7 @@ input.question(`Project name (default: react-template): \n`, (name) => {
   projectCreation(name || "react-template");
 });
 
-const getPackageJSON = (name) =>
+const getPackageJSON = (name: string) =>
   JSON.stringify(
     {
       name: name,
@@ -73,7 +77,7 @@ const getPackageJSON = (name) =>
     2
   );
 
-const projectCreation = (name) => {
+const projectCreation = (name: string) => {
   try {
     logger.info(`Running Vite CLI to create ${name} project...`);
     exec.execSync(`npm create vite@latest ${name} -- --template react-swc-ts`, {
@@ -82,25 +86,28 @@ const projectCreation = (name) => {
     logger.info("Project created");
 
     const path = process.cwd() + "/" + name;
-
     logger.info("Copying new configuration files...");
-    fs.copyFileSync("src/configs/lint/.eslintrc", path + "/.eslintrc");
-    fs.copyFileSync("src/configs/lint/.eslintignore", path + "/.eslintignore");
+    fs.copyFileSync(`${__dirname}/configs/lint/.eslintrc`, path + "/.eslintrc");
     fs.copyFileSync(
-      "src/configs/vite/vite.config.ts",
+      `${__dirname}/configs/lint/.eslintignore`,
+      path + "/.eslintignore"
+    );
+    fs.copyFileSync(
+      `${__dirname}/configs/vite/vite.config.ts`,
       path + "/vite.config.ts"
     );
-    fs.copyFileSync("src/configs/ts/tsconfig.json", path + "/tsconfig.json");
-    fs.copyFileSync("src/configs/.gitignore", path + "/.gitignore");
+    fs.copyFileSync(
+      `${__dirname}/configs/ts/tsconfig.json`,
+      path + "/tsconfig.json"
+    );
+    fs.copyFileSync(`${__dirname}/configs/.gitignore`, path + "/.gitignore");
     fs.writeFileSync(path + "/package.json", getPackageJSON(name));
 
     logger.info("Removing old configuration files...\n");
     fs.rmSync(path + "/.eslintrc.cjs");
-    fs.rmSync(path + "/package.json");
 
     logger.success("Project created successfully!");
   } catch (error) {
-    logger.error("An error occurred while creating the project.");
-    logger.error(error);
+    logger.error(error as string);
   }
 };
