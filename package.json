@@ -1,12 +1,12 @@
 {
-  "name": "react-template",
+  "name": "vite-react-creator",
   "private": false,
   "version": "0.1.0",
   "type": "module",
   "main": "./src/index.js",
   "license": "MIT",
   "bin": {
-    "create-react-template": "./src/index.js"
+    "vite-react-creator": "./src/index.js"
   },
   "dependencies": {
     "chalk": "^5.3.0",
