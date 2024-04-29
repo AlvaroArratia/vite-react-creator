@@ -1,11 +1,12 @@
 {
-  "name": "react-template",
+  "name": "vite-react-creator",
+  "private": false,
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "license": "MIT",
   "bin": {
-    "create-react-template": "./dist/index.js"
+    "vite-react-creator": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsc -w",
