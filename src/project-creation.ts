@@ -16,23 +16,23 @@ const viteProjectCreation = (name: string) => {
 const getPackageJSON = (name: string) =>
   JSON.stringify(
     {
-      name: name,
+      name,
       private: true,
       version: "0.0.0",
       type: "module",
       scripts: {
-        dev: "vite",
-        build: "tsc && vite build",
-        preview: "vite preview",
-        format: "prettier --write .",
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "format": "prettier --write .",
         "format-check": "prettier --check .",
         "eslint-check": "eslint --color .",
         "eslint-fix": "eslint --color --fix .",
         "ts-check": "tsc --noEmit --pretty",
-        lint: "yarn format-check && yarn eslint-check && yarn ts-check",
+        "lint": "yarn format-check && yarn eslint-check && yarn ts-check",
       },
       dependencies: {
-        react: "^18.2.0",
+        "react": "^18.2.0",
         "react-dom": "^18.2.0",
       },
       devDependencies: {
@@ -41,7 +41,7 @@ const getPackageJSON = (name: string) =>
         "@typescript-eslint/eslint-plugin": "^7.0.1",
         "@typescript-eslint/parser": "^7.2.0",
         "@vitejs/plugin-react-swc": "^3.5.0",
-        eslint: "8.57.0",
+        "eslint": "8.57.0",
         "eslint-config-love": "^47.0.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-import": "^2.25.2",
@@ -50,9 +50,9 @@ const getPackageJSON = (name: string) =>
         "eslint-plugin-react": "^7.34.1",
         "eslint-plugin-react-hooks": "^4.6.2",
         "eslint-plugin-react-refresh": "^0.4.6",
-        prettier: "^3.2.5",
-        typescript: "^5.2.2",
-        vite: "^5.2.0",
+        "prettier": "^3.2.5",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0",
         "vite-tsconfig-paths": "^4.3.2",
       },
     },
@@ -61,8 +61,8 @@ const getPackageJSON = (name: string) =>
   );
 
 const copyCustomConfigs = (projectName: string, projectPath: string) => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const configsPath = path.resolve(__dirname, "..", "src", "configs");
+  const dirName = dirname(fileURLToPath(import.meta.url));
+  const configsPath = path.resolve(dirName, "..", "src", "configs");
   logger.info("Copying new configuration files...");
   fs.copyFileSync(
     path.resolve(configsPath, "lint", ".eslintrc"),
@@ -92,7 +92,7 @@ const copyCustomConfigs = (projectName: string, projectPath: string) => {
   fs.rmSync(path.resolve(projectPath, ".eslintrc.cjs"));
 };
 
-const projectCreation = (name: string = "vite-react-app") => {
+const projectCreation = (name = "vite-react-app") => {
   const workDir = process.cwd();
   const projectPath = path.resolve(workDir, name);
   try {
@@ -100,7 +100,7 @@ const projectCreation = (name: string = "vite-react-app") => {
     copyCustomConfigs(name, projectPath);
     logger.success("Project created successfully!");
   } catch (error) {
-    logger.error(`ERROR: ${error}`);
+    logger.error(`ERROR: ${error as string}`);
     logger.warn("Cleaning up...");
     fs.rmSync(projectPath, { recursive: true });
   }
