@@ -7,7 +7,7 @@ import projectCreation from "./project-creation.js";
 const main = () => {
   const program = new Command();
   program
-    .version("0.1.1", "-v, --version", "Output the current version")
+    .version("0.1.2", "-v, --version", "Output the current version")
     .parse(process.argv);
 
   logger.info(
