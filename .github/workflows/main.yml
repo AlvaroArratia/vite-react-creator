@@ -1,0 +1,35 @@
+name: Node.js Package
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - main
+      - "feature/**"
+
+env:
+  NODE_VERSION: 20.12.2
+  CACHE_PACKAGE_MANAGER: "yarn"
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Actions checkout
+        uses: actions/checkout@v4
+      - name: Node.js ${{ env.NODE_VERSION }} setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: ${{ env.CACHE_PACKAGE_MANAGER }}
+      - name: Dependencies installation
+        run: yarn install --frozen-lockfile
+      - name: Format check
+        run: yarn format-check
+      - name: ESLint check
+        run: yarn eslint-check
+      - name: TypeScript check
+        run: yarn ts-check
