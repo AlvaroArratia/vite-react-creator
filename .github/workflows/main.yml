@@ -1,13 +1,15 @@
 name: Node.js Package
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
   pull_request:
+    types:
+      - opened
     branches:
       - main
       - "feature/**"
+  release:
+    types:
+      - created
 
 env:
   NODE_VERSION: 20.12.2
