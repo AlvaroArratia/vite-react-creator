@@ -1,13 +1,14 @@
 name: Node.js Package
 
 on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
   pull_request:
     branches:
       - main
-      - "feature/**"
-  release:
-    types:
-      - created
 
 env:
   NODE_VERSION: 20.12.2
@@ -33,7 +34,7 @@ jobs:
         run: yarn ts-check
 
   build_and_publish:
-    if: github.event.release
+    if: github.ref_name == 'v[0-9]+.[0-9]+.[0-9]+'
     name: Build and Publish
     needs: lint
     runs-on: ubuntu-latest
