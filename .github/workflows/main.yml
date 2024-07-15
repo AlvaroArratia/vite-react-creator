@@ -4,17 +4,11 @@ on:
   push:
     branches:
       - main
-      - develop
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
   pull_request:
     branches:
       - main
-      - develop
-      # - "feature/**"
-      # - "fix/**"
-      # - "hotfix/**"
-      # - "release/v[0-9]+.[0-9]+.[0-9]+"
 
 env:
   NODE_VERSION: 20.12.2
