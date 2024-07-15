@@ -1,13 +1,18 @@
 name: Node.js Package
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+      - develop
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+  pull_request:
+    branches:
       - "feature/**"
-  release:
-    types:
-      - created
+      - "fix/**"
+      - "hotfix/**"
+      - "release/v[0-9]+.[0-9]+.[0-9]+"
 
 env:
   NODE_VERSION: 20.12.2
@@ -33,7 +38,6 @@ jobs:
         run: yarn ts-check
 
   build_and_publish:
-    if: github.event.release
     name: Build and Publish
     needs: lint
     runs-on: ubuntu-latest
