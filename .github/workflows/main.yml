@@ -6,7 +6,7 @@ on:
       - main
   release:
     types:
-      - published
+      - released
 
 env:
   NODE_VERSION: 20.12.2
@@ -32,7 +32,7 @@ jobs:
         run: yarn ts-check
 
   build_and_publish:
-    if: github.event.release.prerelease == 'false' && startsWith(github.event.release.tag_name, 'v') && contains(github.event.release.tag_name, '.')
+    if: github.event_name == 'release' && startsWith(github.event.release.tag_name, 'v') && contains(github.event.release.tag_name, '.')
     name: Build and Publish
     needs: lint
     runs-on: ubuntu-latest
