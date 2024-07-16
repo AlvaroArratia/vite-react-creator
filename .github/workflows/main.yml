@@ -31,7 +31,7 @@ jobs:
         run: yarn ts-check
 
   build_and_publish:
-    if: github.event.action == 'released'
+    if: github.event_name == 'release'
     name: Build and Publish
     needs: lint
     runs-on: ubuntu-latest
