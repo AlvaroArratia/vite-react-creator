@@ -101,8 +101,6 @@ const projectCreation = (name = "vite-react-app") => {
     logger.success("Project created successfully!");
   } catch (error) {
     logger.error(`ERROR: ${error as string}`);
-    logger.warn("Cleaning up...");
-    fs.rmSync(projectPath, { recursive: true });
   }
 };
 
