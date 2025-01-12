@@ -34,7 +34,7 @@ jobs:
         run: pnpm ts-check
 
   build_and_publish:
-    if: github.event_name == 'release'
+    if: ${{ github.event_name == 'release' && ! github.event.release.prerelease }}
     name: Build and Publish
     needs: lint
     runs-on: ubuntu-latest
