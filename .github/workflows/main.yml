@@ -8,7 +8,7 @@ on:
     types: [released]
 
 env:
-  NODE_VERSION: 20.12.2
+  NODE_VERSION: 22.13.0
   CACHE_PACKAGE_MANAGER: "yarn"
 
 jobs:
