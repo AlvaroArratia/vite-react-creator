@@ -4,7 +4,7 @@
   "version": "0.1.2",
   "license": "MIT",
   "engines": {
-    "node": "20.12.2"
+    "node": "22.13.0"
   },
   "type": "module",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "eslint-check": "eslint --color .",
     "eslint-fix": "eslint --color --fix .",
     "ts-check": "tsc --noEmit --pretty",
-    "lint": "yarn format-check && yarn eslint-check && yarn ts-check"
+    "lint": "prettier --check . && eslint --color . && tsc --noEmit --pretty"
   },
   "dependencies": {
     "chalk": "^5.3.0",

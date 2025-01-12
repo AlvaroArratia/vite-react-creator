@@ -7,3 +7,4 @@ src/configs
 # Files
 .eslintignore
 .gitingore
+pnpm-lock.yaml
